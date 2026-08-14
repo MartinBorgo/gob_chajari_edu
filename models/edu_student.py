@@ -10,8 +10,8 @@ class EduStudent(models.Model):
         required=True
     )
     photo = fields.Binary(string="Foto")
-    dni = fields.Integer(
-        string="Número de documento",
+    dni = fields.Char(
+        string="DNI",
         required=True
     )
     birthday = fields.Date(
@@ -27,7 +27,7 @@ class EduStudent(models.Model):
         required=True
     )
     max_educative_level = fields.Selection(
-        string="Máximo nivel edicativo",
+        string="Nivel educativo",
         selection=[
             ("fin_uni", "Universitario/Terciario completo"),
             ("none_fin_uni", "Universitario/Terciario incompleto"),

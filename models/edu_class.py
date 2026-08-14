@@ -6,7 +6,11 @@ class EduClass(models.Model):
     _name = "edu.class"
     _description = "Courses Classes"
 
-    name = fields.Char(compute="_compute_class_name")
+    name = fields.Char(
+        string="Clase"
+        compute="_compute_class_name",
+        store=True
+    )
     date = fields.Date(
         string="Fecha",
         default=fields.Date.today
@@ -26,10 +30,10 @@ class EduClass(models.Model):
         inverse_name="class_id"
     )
 
-    @api.depends("date", "course_instance_id")
+    @api.depends("date")
     def _compute_class_name(self):
         for rec in self:
             formated_date = format_date(
                 self.env, rec.date, lang_code=self.env.user.lang
             )
-            rec.name = f"Clase {formated_date}"
+            rec.name = f"Clase - {formated_date}"

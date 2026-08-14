@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class EduCommissionLineWizard(models.TransientModel):
@@ -12,5 +12,16 @@ class EduCommissionLineWizard(models.TransientModel):
     )
     is_part = fields.Boolean(
         string="Forma parte",
-        default=False
+        compute="_compute_is_part",
+        store=True,
+        readonly=False,
+        precompute=True
     )
+
+    @api.depends("wizard_id.single_commission")
+    def _compute_is_part(self):
+        for rec in self:
+            if rec.wizard_id:
+                rec.is_part = rec.wizard_id.single_commission
+            else:
+                rec.is_part = False

@@ -5,7 +5,10 @@ class EduCourseInstance(models.Model):
     _name = "edu.course.instance"
     _description = "Instances of the Courses"
 
-    name = fields.Char(string="Curso", compute="_compute_instance_name")
+    name = fields.Char(
+        string="Curso",
+        compute="_compute_instance_name"
+    )
     state = fields.Selection(
         string="Estado del curso",
         selection=[
@@ -27,9 +30,9 @@ class EduCourseInstance(models.Model):
     period = fields.Selection(
         string="Trimestre",
         selection=[
-            ("first", "Primer trimestre"),
-            ("second", "Segundo trimestre"),
-            ("third", "Tercer trimestre"),
+            ("first", "Primer Trimestre"),
+            ("second", "Segundo Trimestre"),
+            ("third", "Tercer Trimestre"),
         ],
         required=True
     )
@@ -46,7 +49,7 @@ class EduCourseInstance(models.Model):
         column2="student_id",
     )
     student_history_ids = fields.One2many(
-        string="Acta de notas",
+        string="Notas finales",
         comodel_name="edu.student.history",
         inverse_name="course_instance_id"
     )

@@ -5,16 +5,16 @@
         <field name="name">edu.attendance.wizard.form</field>
         <field name="model">edu.attendance.wizard</field>
         <field name="arch" type="xml">
-            <form string="Asistencias">
-                <div class="oe_title">
-                    <label for="date" string="Clase" />
+            <form string="Programar clase">
+                <div class="oe_title"> 
                     <h1>
-                       <field name="date" readonly="1" />
+                       <field name="name" readonly="1" />
                     </h1>
                 </div>
                 <group>
                     <group>
-                        <field name="course_instance_id" readonly="1"/>
+		        <field name="date"/>
+                        <field name="course_instance_id" invisible="1"/>
                     </group>
                     <group>
                         <field name="commission_id"/>
@@ -22,7 +22,7 @@
                 </group>
                 <notebook>
                     <page string="Alumnos">
-                        <field name="lines">
+                        <field name="line_ids">
                             <list editable="bottom" create="0" delete="0">
                                 <field name="student_id" readonly="1" force_save="1"/>
                                 <field name="assistance"/>
@@ -32,7 +32,7 @@
                 </notebook>
                 <footer>
                     <button
-                        string="Guardar Asistencia"
+                        string="Guardar"
                         name="action_confirm"
                         type="object"
                         class="btn-primary"
@@ -53,5 +53,6 @@
         <field name="res_model">edu.attendance.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+	<field name="context">{'default_course_instance_id': active_id}</field>
     </record>
 </odoo>

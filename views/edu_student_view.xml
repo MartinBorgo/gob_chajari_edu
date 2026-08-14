@@ -36,7 +36,12 @@
                             <field name="student_history_ids" readonly="1">
                                 <list>
                                     <field name="course_instance_id" />
-                                    <field name="student_state" />
+                                    <field name="student_state"
+					 widget="badge"
+					 decoration-success="student_state == 'pass'"
+                                         decoration-danger="student_state == 'not_pass'"
+                                         decoration-info="student_state == 'attending'"
+                                         decoration-warning="student_state == 'give_up'"/>
                                 </list>
                             </field>
                         </page>

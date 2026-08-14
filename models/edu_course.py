@@ -11,12 +11,12 @@ class EduCourse(models.Model):
     )
     content = fields.Html(string="Programa de contenidos")
     student_limit = fields.Integer(
-        string="Cupo de estudiantes",
+        string="Cupo",
         default=15,
         required=True
     )
     teacher_ids = fields.Many2many(
-        string="Capacitador",
+        string="Profesor/es",
         comodel_name="res.users",
         relation="course_teacher_rel",
         column1="course_id",
