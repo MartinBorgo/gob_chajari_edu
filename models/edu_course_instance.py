@@ -112,3 +112,9 @@ class EduCourseInstance(models.Model):
 
     def _search_is_teacher(self, operator, value):
         return [("course_id.teacher_ids", "in", [self.env.user.id])]
+
+    def finish_course(self):
+        for rec in self:
+            rec.state = "done"
+
+    

@@ -26,27 +26,34 @@
         name="Cursos"
         parent="edu_root_menu"
         sequence="30"
+	/>
+    <menuitem
+	id="settings_menu"
+	name="Ajustes"
+	parent="edu_root_menu"
+	sequence="40"
+	groups="edu.group_edu_manager"
     />
     <!-- Menu items -->
     <menuitem
         id="course_menu_item"
-        name="Cursos"
+        name="Todos los Cursos"
         parent="course_menu"
         action="edu_course_action"
         sequence="10"
     />
     <menuitem
         id="course_instance_form_item"
-        name="Habilitar curso"
-        parent="course_menu"
+        name="Habilitar Curso"
+        parent="settings_menu"
         action="edu_course_instance_form_action"
         sequence="20"
         groups="edu.group_edu_manager"
     />
     <menuitem
         id="course_instance_general_item"
-        name="Cursos habilitados"
-        parent="course_menu"
+        name="Cursos Habilitados"
+        parent="settings_menu"
         action="edu_course_instance_general_action"
         sequence="30"
         groups="edu.group_edu_manager"

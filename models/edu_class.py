@@ -7,7 +7,7 @@ class EduClass(models.Model):
     _description = "Courses Classes"
 
     name = fields.Char(
-        string="Clase"
+        string="Clase",
         compute="_compute_class_name",
         store=True
     )

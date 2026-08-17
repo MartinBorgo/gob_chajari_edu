@@ -16,8 +16,9 @@
                     <notebook>
                         <page string="Cursos impartidos">
                             <field name="course_instance_ids" readonly="1">
-                                <list>
+                                <list default_group_by="period">
                                     <field name="name"/>
+				    <field name="period" column_invisible="True"/>
                                 </list>
                             </field>
                         </page>

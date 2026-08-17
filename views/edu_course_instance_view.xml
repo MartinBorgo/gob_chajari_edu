@@ -8,22 +8,29 @@
             <form string="Habilitación de curso">
                 <header>
 		    <button
+		        string="Finalizar curso"
+		        name="finish_course"
+			type="object"
+			class="btn-primary"
+			icon="fa-graduation-cap"
+			groups="edu.group_edu_manager"
+		    />
+		    <button
                         string="Programar clase"
                         name="%(edu.edu_attendance_wizard_action)d"
                         type="action"
                         class="btn-secundary"
+			icon="fa-calendar"
                     /> 
 		    <button
                         string="Crear comisión"
                         name="%(edu.edu_commission_wizard_action)d"
                         type="action"
                         class="btn-secundary"
+			icon="fa-users"
                         groups="edu.group_edu_manager"
                     />
-                    <field name="state"
-                           widget="statusbar"
-                           options="{'clickable': '1'}"
-                           groups="edu.group_edu_manager"/>
+                    <field name="state" widget="statusbar"/>
 		</header>
                 <sheet>
                     <div class="oe_title">
