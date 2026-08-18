@@ -12,6 +12,7 @@
 		        name="finish_course"
 			type="object"
 			class="btn-primary"
+			disabled="state == 'done'"
 			icon="fa-graduation-cap"
 			groups="edu.group_edu_manager"
 		    />
@@ -20,6 +21,7 @@
                         name="%(edu.edu_attendance_wizard_action)d"
                         type="action"
                         class="btn-secundary"
+			invisible="state == 'done'"
 			icon="fa-calendar"
                     /> 
 		    <button
@@ -27,6 +29,7 @@
                         name="%(edu.edu_commission_wizard_action)d"
                         type="action"
                         class="btn-secundary"
+			invisible="state == 'done'"
 			icon="fa-users"
                         groups="edu.group_edu_manager"
                     />
