@@ -23,12 +23,11 @@
                     <group id="root_group">
                         <group id="personal_data_group">
                             <field name="dni" />
-                            <field name="phone" />
                             <field name="birthday" />
                         </group>
                         <group id="extra_data_group">
                             <field name="living_place" />
-                            <field name="max_educative_level" />
+                            <field name="phone" />
                         </group>
                     </group>
                     <notebook>
@@ -36,8 +35,7 @@
                             <field name="student_history_ids" readonly="1">
                                 <list>
                                     <field name="course_instance_id" />
-                                    <field name="student_state"
-					 widget="badge"
+                                    <field name="student_state" widget="badge"
 					 decoration-success="student_state == 'pass'"
                                          decoration-danger="student_state == 'not_pass'"
                                          decoration-info="student_state == 'attending'"

@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form view -->
-    <record id="edu_course_commission_form_view" model="ir.ui.view">
-        <field name="name">edu.course.commission.form</field>
-        <field name="model">edu.course.commission</field>
-        <field name="arch" type="xml">
-            <form string="Comisión">
-                <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" readonly="1"/>
-                        </h1>
-                    </div>
-                    <group>
-		        <group>
-                            <field name="class_days"/>
-			</group>
-			<group>
-                            <field name="start_hour" widget="float_time"/>
-                            <field name="end_hour" widget="float_time"/>
-			</group>
-                    </group>
-                    <notebook>
-                        <page string="Miembros">
-                            <field name="student_ids" readonly="1">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="phone"/>
-                                    <field name="max_educative_level"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Clases impartidas">
-                            <field name="class_ids" readonly="1">
-                                <list>
-                                    <field name="name"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
+  <!-- Form view -->
+  <record id="edu_course_commission_form_view" model="ir.ui.view">
+    <field name="name">edu.course.commission.form</field>
+    <field name="model">edu.course.commission</field>
+    <field name="arch" type="xml">
+      <form string="Comisión">
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name" readonly="1"/>
+            </h1>
+          </div>
+          <group>
+	    <group>
+              <field name="class_days"/>
+	    </group>
+	    <group>
+              <field name="start_hour" widget="float_time"/>
+              <field name="end_hour" widget="float_time"/>
+	    </group>
+          </group>
+          <notebook>
+            <page string="Miembros">
+              <field name="student_ids" readonly="1">
+                <list>
+                  <field name="name"/>
+                  <field name="phone"/>
+                </list>
+              </field>
+            </page>
+            <page string="Clases impartidas">
+              <field name="class_ids" readonly="1">
+                <list>
+                  <field name="name"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
 </odoo>

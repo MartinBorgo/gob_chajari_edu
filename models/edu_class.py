@@ -15,6 +15,11 @@ class EduClass(models.Model):
         string="Fecha",
         default=fields.Date.today
     )
+    teacher_id = fields.Many2one(
+        string="Profesor",
+        comodel_name="res.users"
+    ) 
+    observation = fields.Text(string="Aclaración")
     course_instance_id = fields.Many2one(
         string="Curso",
         comodel_name="edu.course.instance"
@@ -29,7 +34,7 @@ class EduClass(models.Model):
         comodel_name="edu.class.assistance",
         inverse_name="class_id"
     )
-
+   
     @api.depends("date")
     def _compute_class_name(self):
         for rec in self:

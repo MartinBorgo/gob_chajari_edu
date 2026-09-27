@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="group_edu_manager" model="res.groups">
-        <field name="name">Education Manager</field>
-        <field name="comment">The user will be able to create and edit every model in the module</field>
-        <field name="user_ids" eval="[(4, ref('base.user_admin')), (4, ref('base.user_root'))]"/>
-    </record>
+  <!-- Category -->
+  <record id="module_category_edu" model="ir.module.category">
+    <field name="name">Gestión de cursos</field>
+    <field name="sequence">10</field>
+  </record>
 
-    <record id="group_edu_teacher" model="res.groups">
-        <field name="name">Teacher</field>
-        <field name="comment">This user will be able to see student data manage classes and assistance</field>
-    </record>
+  <!-- Privilege group -->
+  <record id="privilege_edu" model="res.groups.privilege">
+    <field name="name">Gestión de cursos</field>
+    <field name="category_id" ref="module_category_edu"/>
+    <field name="sequence">10</field>
+  </record>
+  
+  <!-- Groups -->
+  <record id="group_edu_manager" model="res.groups">
+    <field name="name">Administrador</field>
+    <field name="comment">El usuario podrá crear, editar y eliminar todos los objetos que forman parte del módulo.</field>
+    <field name="privilege_id" ref="privilege_edu"/>
+    <field name="user_ids" eval="[(4, ref('base.user_admin')), (4, ref('base.user_root'))]"/>
+  </record>
+  
+  <record id="group_edu_teacher" model="res.groups">
+    <field name="name">Usuario / Profesor</field>
+    <field name="comment">Este usuario podrá ver a los estudiante y su información personal además de gestionar las clases que imparte.</field>
+    <field name="privilege_id" ref="privilege_edu"/>
+  </record>
 </odoo>

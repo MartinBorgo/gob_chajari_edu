@@ -1,6 +1,6 @@
 {
-    "name": "Education",
-    "summery": "An education platform to track students",
+    "name": "Gestión de cursos",
+    "summary": "Una aplicación simple para la gestión de cursos.",
     "author": "Martin Borgo",
     "category": "Uncategorized",
     "application": True,

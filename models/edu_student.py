@@ -18,26 +18,8 @@ class EduStudent(models.Model):
         string="Fecha de nacimiento",
         required=True
     )
-    living_place = fields.Char(
-        string="Domicilio",
-        required=True
-    )
-    phone = fields.Char(
-        string="Número de teléfono",
-        required=True
-    )
-    max_educative_level = fields.Selection(
-        string="Nivel educativo",
-        selection=[
-            ("fin_uni", "Universitario/Terciario completo"),
-            ("none_fin_uni", "Universitario/Terciario incompleto"),
-            ("fin_high", "Secundario completo"),
-            ("none_fin_high", "Secundaria incompleta"),
-            ("fin_pri", "Primaria completa"),
-            ("none_fin_pri", "Primaria incompleta"),
-        ],
-        required=True
-    )
+    living_place = fields.Char(string="Domicilio")
+    phone = fields.Char(string="Número de teléfono") 
     student_history_ids = fields.One2many(
         string="Cursos realizados",
         comodel_name="edu.student.history",

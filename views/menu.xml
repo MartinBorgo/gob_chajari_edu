@@ -3,7 +3,7 @@
     <!-- Navigator bar -->
     <menuitem
         id="edu_root_menu"
-        name="Gestión de Cursos"
+        name="Gestión de cursos"
         sequence="10"
     />
     <!-- Navigator bar items -->
@@ -37,14 +37,14 @@
     <!-- Menu items -->
     <menuitem
         id="course_menu_item"
-        name="Todos los Cursos"
+        name="Todos los cursos"
         parent="course_menu"
         action="edu_course_action"
         sequence="10"
     />
     <menuitem
         id="course_instance_form_item"
-        name="Habilitar Curso"
+        name="Habilitar curso"
         parent="settings_menu"
         action="edu_course_instance_form_action"
         sequence="20"
@@ -52,7 +52,7 @@
     />
     <menuitem
         id="course_instance_general_item"
-        name="Cursos Habilitados"
+        name="Cursos habilitados"
         parent="settings_menu"
         action="edu_course_instance_general_action"
         sequence="30"

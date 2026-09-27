@@ -1,162 +1,160 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- Form view -->
-    <record id="edu_course_instance_form_view" model="ir.ui.view">
-        <field name="name">edu.course.instance.form</field>
-        <field name="model">edu.course.instance</field>
-        <field name="arch" type="xml">
-            <form string="Habilitación de curso">
-                <header>
-		    <button
-		        string="Finalizar curso"
-		        name="finish_course"
-			type="object"
-			class="btn-primary"
-			disabled="state == 'done'"
-			icon="fa-graduation-cap"
-			groups="edu.group_edu_manager"
-		    />
-		    <button
-                        string="Programar clase"
-                        name="%(edu.edu_attendance_wizard_action)d"
-                        type="action"
-                        class="btn-secundary"
-			invisible="state == 'done'"
-			icon="fa-calendar"
-                    /> 
-		    <button
-                        string="Crear comisión"
-                        name="%(edu.edu_commission_wizard_action)d"
-                        type="action"
-                        class="btn-secundary"
-			invisible="state == 'done'"
-			icon="fa-users"
-                        groups="edu.group_edu_manager"
-                    />
-                    <field name="state" widget="statusbar"/>
-		</header>
-                <sheet>
-                    <div class="oe_title">
-                        <label for="name" string="Curso" />
-                        <h1>
-                            <field name="name" readonly="1" />
-                        </h1>
-                    </div>
-                    <group id="root_group">
-                        <group id="lvl_1_group">
-                            <field name="season_id"/>
-                            <field name="course_id"/>
-                            <field name="period"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Alumnos">
-                            <field name="student_ids">
-                                <list editable="top">
-                                    <field name="name"/>
-                                    <field name="phone"/>
-                                    <field name="max_educative_level"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Comisiones">
-                            <field name="commission_ids">
-                                <list create="0">
-                                    <field name="name"/>
-                                    <field name="class_days"/>
-                                    <field name="start_hour" widget="float_time"/>
-                                    <field name="end_hour" widget="float_time"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Clases">
-                            <field name="class_ids">
-                                <list create="0">
-                                    <field name="name"/>
-                                    <field name="commission_id"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Notas de estudiantes">
-                            <field name="student_history_ids">
-                                <list create="0" editable="top">
-                                    <field name="student_id" readonly="1"/>
-                                    <field name="student_state" 
-                                        decoration-success="student_state == 'pass'"
-                                        decoration-danger="student_state == 'not_pass'"
-                                        decoration-info="student_state == 'attending'"
-                                        decoration-warning="student_state == 'give_up'"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <!-- List view -->
-    <record id="edu_course_instance_list_view" model="ir.ui.view">
-        <field name="name">edu.course.instance.list</field>
-        <field name="model">edu.course.instance</field>
-        <field name="arch" type="xml">
-            <list string="Cursos en progreso" create="0">
-                <field name="name" />
-            </list>
-        </field>
-    </record>
-
-    <!-- Search view -->
-    <record id="edu_course_instance_search_view" model="ir.ui.view">
-      <field name="name">edu.course.instance.search.view</field>
-      <field name="model">edu.course.instance</field>
-      <field name="arch" type="xml">
-	<search>
-	  <!-- Manual search -->
-	  <field name="name" string="Nombre"/>
-	  <!-- Filters -->
-	  <filter
-	      name="draft_courses"
-	      string="Cursos habilitados"
-	      domain="[('state', '=', 'draft')]"/>
-	  <filter
-	      name="my_courses"
-	      string="Mis cursos"
-	      domain="[('is_teacher', '=', True)]"/>
-	</search>
-      </field>
-    </record>
-    
-    <!-- Action -->
-    <record id="edu_course_instance_general_action" model="ir.actions.act_window">
-        <field name="name">Cursos habilitados</field>
-        <field name="res_model">edu.course.instance</field>
-        <field name="view_mode">list,form</field>
-	<field name="search_view_id" ref="edu_course_instance_search_view"/>
-        <field name="context">{'search_default_draft_courses': 1}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                No existen cursos habilitados.
-            </p>
-        </field>
-    </record>
-
-    <record id="edu_course_instance_form_action" model="ir.actions.act_window">
-        <field name="name">Crear instancia de curso</field>
-        <field name="res_model">edu.course.instance</field>
-        <field name="view_mode">form</field>
-    </record>
-
-    <record id="edu_course_instance_my_courses_action" model="ir.actions.act_window">
-        <field name="name">Mis cursos</field>
-        <field name="res_model">edu.course.instance</field>
-        <field name="view_mode">list,form</field>
-	<field name="search_view_id" ref="edu_course_instance_search_view"/>
-        <field name="context">{'search_default_my_courses': 1}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Actualmente no esta dando ningún curso.
-            </p>
-        </field>
-    </record>
+  <!-- Form view -->
+  <record id="edu_course_instance_form_view" model="ir.ui.view">
+    <field name="name">edu.course.instance.form</field>
+    <field name="model">edu.course.instance</field>
+    <field name="arch" type="xml">
+      <form string="Habilitación de curso">
+        <header>
+	  <button
+	      string="Finalizar curso"
+	      name="finish_course"
+	      type="object"
+	      class="btn-primary"
+	      invisible="state == 'done'"
+	      icon="fa-graduation-cap"
+	      groups="edu.group_edu_manager"/>
+	  <button
+              string="Registrar clase"
+              name="%(edu.edu_attendance_wizard_action)d"
+              type="action"
+              class="btn-secundary"
+	      invisible="state == 'done'"
+	      icon="fa-book"/> 
+	  <button
+              string="Crear comisión"
+              name="%(edu.edu_commission_wizard_action)d"
+              type="action"
+              class="btn-secundary"
+	      invisible="state == 'done'"
+	      icon="fa-users"
+              groups="edu.group_edu_manager"/>
+	  
+          <field name="state" widget="statusbar"/>
+	</header>
+        <sheet>
+          <div class="oe_title">
+            <label for="name" string="Curso" />
+            <h1>
+              <field name="name" readonly="1" />
+            </h1>
+          </div>
+          <group id="root_group">
+            <group id="lvl_1_group">
+              <field name="season_id"/>
+              <field name="course_id"/>
+              <field name="period"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Alumnos">
+              <field name="student_ids">
+                <list editable="top">
+                  <field name="name"/>
+		  <field name="dni"/>
+                  <field name="phone"/>
+                </list>
+              </field>
+            </page>
+            <page string="Comisiones">
+              <field name="commission_ids">
+                <list create="0">
+                  <field name="name"/>
+                  <field name="class_days"/>
+                  <field name="start_hour" widget="float_time"/>
+                  <field name="end_hour" widget="float_time"/>
+                </list>
+              </field>
+            </page>
+            <page string="Clases">
+              <field name="class_ids">
+                <list create="0">
+                  <field name="name"/>
+                  <field name="commission_id"/>
+                </list>
+              </field>
+            </page>
+            <page string="Notas de estudiantes">
+              <field name="student_history_ids">
+                <list create="0" editable="top">
+                  <field name="student_id" readonly="1"/>
+                  <field name="student_state" 
+                         decoration-success="student_state == 'pass'"
+                         decoration-danger="student_state == 'not_pass'"
+                         decoration-info="student_state == 'attending'"
+                         decoration-warning="student_state == 'give_up'"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+  <!-- List view -->
+  <record id="edu_course_instance_list_view" model="ir.ui.view">
+    <field name="name">edu.course.instance.list</field>
+    <field name="model">edu.course.instance</field>
+    <field name="arch" type="xml">
+      <list string="Cursos en progreso" create="0">
+        <field name="name" />
+      </list>
+    </field>
+  </record>
+  
+  <!-- Search view -->
+  <record id="edu_course_instance_search_view" model="ir.ui.view">
+    <field name="name">edu.course.instance.search.view</field>
+    <field name="model">edu.course.instance</field>
+    <field name="arch" type="xml">
+      <search>
+	<!-- Manual search -->
+	<field name="name" string="Nombre"/>
+	<!-- Filters -->
+	<filter
+	    name="draft_courses"
+	    string="Cursos habilitados"
+	    domain="[('state', '=', 'draft')]"/>
+	<filter
+	    name="my_courses"
+	    string="Mis cursos"
+	    domain="[('is_teacher', '=', True)]"/>
+      </search>
+    </field>
+  </record>
+  
+  <!-- Action -->
+  <record id="edu_course_instance_general_action" model="ir.actions.act_window">
+    <field name="name">Cursos habilitados</field>
+    <field name="res_model">edu.course.instance</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="edu_course_instance_search_view"/>
+    <field name="context">{'search_default_draft_courses': 1}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No existen cursos habilitados.
+      </p>
+    </field>
+  </record>
+  
+  <record id="edu_course_instance_form_action" model="ir.actions.act_window">
+    <field name="name">Crear instancia de curso</field>
+    <field name="res_model">edu.course.instance</field>
+    <field name="view_mode">form</field>
+  </record>
+  
+  <record id="edu_course_instance_my_courses_action" model="ir.actions.act_window">
+    <field name="name">Mis cursos</field>
+    <field name="res_model">edu.course.instance</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="edu_course_instance_search_view"/>
+    <field name="context">{'search_default_my_courses': 1}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Actualmente no esta dando ningún curso.
+      </p>
+    </field>
+  </record>
 </odoo>

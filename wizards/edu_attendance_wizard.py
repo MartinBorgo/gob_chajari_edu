@@ -13,6 +13,18 @@ class EduAttendanceWizard(models.TransientModel):
         string="Curso",
         comodel_name="edu.course.instance"
     )
+    teacher_id = fields.Many2one(
+        string="Profesor",
+        comodel_name="res.users",
+        domain="[('id', 'in', course_teacher_ids)]",
+        required=True
+    )
+    course_teacher_ids = fields.Many2many(
+        string="Profesores del curso",
+        comodel_name="res.users",
+        compute="_compute_course_teacher_ids"
+    )
+    observation = fields.Text(string="Aclaración")
     commission_id = fields.Many2one(
         string="Comisión",
         comodel_name="edu.course.commission",
@@ -29,6 +41,17 @@ class EduAttendanceWizard(models.TransientModel):
         inverse_name="wizard_id",
     )
 
+    @api.depends(
+        "course_instance_id",
+        "course_instance_id.course_id",
+        "course_instance_id.course_id.teacher_ids"
+    )
+    def _compute_course_teacher_ids(self):
+        for rec in self:
+            course = rec.course_instance_id.course_id
+            teachers = course.mapped("teacher_ids")
+            rec.course_teacher_ids = teachers
+     
     @api.onchange("commission_id")
     def _onchange_commission_id(self):
         if not self.commission_id:
@@ -58,6 +81,8 @@ class EduAttendanceWizard(models.TransientModel):
 
         new_class = self.env["edu.class"].create({
             "date": self.date,
+            "teacher_id": self.teacher_id.id,
+            "observation": self.observation,
             "course_instance_id": self.course_instance_id.id,
             "commission_id": self.commission_id.id
         })
