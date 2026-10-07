@@ -1,4 +1,4 @@
-from odoo import api ,fields, models
+from odoo import api ,fields, models, Command
 from odoo.exceptions import UserError
 
 
@@ -10,7 +10,6 @@ class EduCommissionWizard(models.TransientModel):
         string="Comisión",
         required=True
     )
-    single_commission = fields.Boolean(string="Comisión única")
     class_days = fields.Selection(
         string="Día de cursada",
         selection=[
@@ -39,8 +38,6 @@ class EduCommissionWizard(models.TransientModel):
         comodel_name="edu.commission.line.wizard",
         inverse_name="wizard_id",
         compute="_compute_line_ids",
-        store=True,
-        precompute=True,
         readonly=False
     )
 
@@ -48,12 +45,14 @@ class EduCommissionWizard(models.TransientModel):
     def _compute_line_ids(self):
         for rec in self:
             course = rec.course_instance_id
-            assigned_students = course.commission_ids.mapped("student_ids")
-            available_students = course.student_ids - assigned_students
-            rec.line_ids = [
-                fields.Command.create({"student_id": student.id, "is_part": False})
-                for student in available_students
+            lines = [
+                Command.create({
+                    "student_id": student.id,
+                    "is_part": False
+                })
+                for student in course.student_ids
             ]
+            rec.line_ids = lines
       
     def action_confirm(self):
         selected_students = self.line_ids.filtered(lambda l: l.is_part).mapped("student_id")

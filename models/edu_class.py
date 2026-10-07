@@ -18,7 +18,11 @@ class EduClass(models.Model):
     teacher_id = fields.Many2one(
         string="Profesor",
         comodel_name="res.users"
-    ) 
+    )
+    is_teacher_present = fields.Boolean(
+        string="Profesor presente",
+        default=True
+    )
     observation = fields.Text(string="Aclaración")
     course_instance_id = fields.Many2one(
         string="Curso",

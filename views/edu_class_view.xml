@@ -17,6 +17,8 @@
               <field name="course_instance_id" invisible="1"/>
 	      <field name="teacher_id"/>
 	      <field name="date"/>
+	      <field name="is_teacher_present"
+		     widget="boolean_toggle"/>
 	    </group>
 	    <group>
 	     <field name="commission_id"/>
@@ -26,7 +28,9 @@
           <notebook>
             <page string="Asistencias">
               <field name="assistance_ids">
-                <list create="0">
+                <list create="0"
+		      delete="0"
+		      editable="top">
                   <field name="student_id"/>
                   <field name="assistance"/>
                 </list>

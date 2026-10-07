@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, Command
 from odoo.tools import format_date
 
 
@@ -18,6 +18,10 @@ class EduAttendanceWizard(models.TransientModel):
         comodel_name="res.users",
         domain="[('id', 'in', course_teacher_ids)]",
         required=True
+    )
+    is_teacher_present = fields.Boolean(
+        string="Profesor presente",
+        default=True
     )
     course_teacher_ids = fields.Many2many(
         string="Profesores del curso",
@@ -55,15 +59,18 @@ class EduAttendanceWizard(models.TransientModel):
     @api.onchange("commission_id")
     def _onchange_commission_id(self):
         if not self.commission_id:
-            self.line_ids = [(5, 0, 0)]
+            self.line_ids = [Command.clear()]
             return
 
         lines = [
-            (0, 0, {"student_id": student.id, "assistance": True})
+            Command.create({
+                "student_id": student.id,
+                "assistance": True
+            })
             for student in self.commission_id.student_ids
         ]
 
-        self.line_ids = [(5, 0, 0)] + lines
+        self.line_ids = [Command.clear()] + lines
 
     @api.depends("date")
     def _compute_name(self):
@@ -82,6 +89,7 @@ class EduAttendanceWizard(models.TransientModel):
         new_class = self.env["edu.class"].create({
             "date": self.date,
             "teacher_id": self.teacher_id.id,
+            "is_teacher_present": self.is_teacher_present,
             "observation": self.observation,
             "course_instance_id": self.course_instance_id.id,
             "commission_id": self.commission_id.id
